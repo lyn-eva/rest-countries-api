@@ -1,0 +1,130 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito+Sans:300,600,800);
+
+* {
+   margin: 0;
+   font-family: "Nunito Sans", sans-serif;
+}
+
+:root {
+   --clr-d-mode-elements: hsl(209, 23%, 22%);
+   --clr-d-mode-background: hsl(207, 26%, 17%);
+   --clr-l-mode-text: hsl(200, 15%, 8%);
+   --clr-l-mode-input: hsl(0, 0%, 52%);
+   --clr-l-mode-background: hsl(0, 0%, 98%);
+   --d-mode-text--l-mode-element: hsl(0, 0%, 100%);
+}
+.flex {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+body {
+   background-color: var(--clr-d-mode-background);
+}
+.main-ctr {
+   width: 90%;
+   margin: 0 auto;
+}
+header {
+   padding: 1.3rem 0;
+   background-color: var(--clr-d-mode-elements);
+}
+h1, header button {
+   color: var(--d-mode-text--l-mode-element);
+}
+h1 {
+   font-size: 1.4rem;
+}
+header i {
+   margin-right: 5px;
+}
+header button {
+   background-color: transparent;
+   border: none;
+   font-weight: 600;
+   font-size: 1rem;
+}
+header button:hover {
+   cursor: pointer;
+   opacity: .8;
+}
+.main-hdr {
+   padding: 2rem 0;
+}
+.inp-ctr input, .filter-region button, .options {
+   border-radius: 5px;
+}
+.inp-ctr {
+   position: relative;
+   font-size: 13px;
+   width: 50%;
+   max-width: 25rem;
+}
+.inp-ctr input {
+   box-sizing: border-box;
+   padding-left: 2.6rem;
+   background-color: var(--clr-d-mode-elements);
+   color: var(--d-mode-text--l-mode-element);
+   border: none;
+   height: 2.4rem;
+   width: 100%;
+
+   font-size: 13px;
+}
+.inp-ctr i {
+   position: absolute;
+   left: 1rem;
+   top: 12px;
+   color: var(--d-mode-text--l-mode-element);
+}
+.filter-region {
+   position: relative;
+   height: 2.4rem;
+   width: 10rem;
+   /* outline: 2px solid red; */
+}
+.filter-region button {
+   box-sizing: border-box;
+   border: none;
+   width: 100%;
+   height: 100%;
+   text-align: left;
+   padding-left: 12px;
+   background-color: var(--clr-d-mode-elements);
+   color: var(--d-mode-text--l-mode-element);
+   font-size: 13px;
+   letter-spacing: 1px;
+}
+.filter-region i {
+   position: absolute;
+   color: var(--d-mode-text--l-mode-element);
+   right: 10px;
+   top: 13px;
+   font-size: 13px;
+}
+.options {
+   opacity: 0;
+   pointer-events: none;
+   box-sizing: border-box;
+   position: absolute;
+   top: 2.6rem;
+   width: 100%;
+   background-color: var(--clr-d-mode-elements);
+   font-size: 13px;
+   padding: 8px 0;
+}
+.filter-region option {
+   color: var(--d-mode-text--l-mode-element);
+   padding: 5px 12px;
+}
+.filter-region:hover, .filter-region button:hover {
+   cursor: pointer;
+}
+.options-visible {
+   opacity: 1;
+   pointer-events: initial;
+}
+.filter-region option:hover {
+   background-color: var(--clr-d-mode-background);
+}
