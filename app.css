@@ -132,13 +132,14 @@ header button:hover {
 
 .main-content {
    display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
    flex-wrap: wrap;
    gap: 4vw;
+   margin-bottom: 2rem;
 }
 .card {
    background-color: var(--clr-d-mode-elements);
-   width: 220px;
+   width: 250px;
 }
 .flag img {
    width: 100%;

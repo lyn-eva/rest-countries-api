@@ -12,28 +12,35 @@ options.onclick = (e) => {
 };
 
 document.addEventListener("DOMContentLoaded", (e) => {
-   fetch("https://restcountries.com/v3.1/region/europe", { method: "get" })
+   fetch("https://restcountries.com/v3.1/all", { method: "get" })
       .then((response) => {
+         console.log(response);
          return response.json();
       })
       .then((response) => {
          console.log(response);
-         // const {
-         //    name: { common }, population,
-         //    region,
-         //    capital,
-         //    flags: { png },
-         // } = response[0];
-         // createCard(common, population, region, capital, png)
+         const mainContent = generateCards(response);
+         document.querySelector(".main-hdr").after(mainContent);
       })
       .catch((error) => {
          console.log(error);
       });
-});
+   });
+   
+function generateCards(cards) {
+   const mainContent = document.createElement('div');
+   mainContent.setAttribute('class', "main-content");
+
+   cards.forEach(cd => {
+      const {name: { common }, population,region, capital, flags: { png },} = cd;
+      const temp = createCard(common, population, region, capital, png);   
+      mainContent.appendChild(temp);
+   });
+
+   return mainContent;
+}
 
 function createCard(name, pop, region, capital, flagURL) {
-   const mainContent = document.createElement('div');
-   mainContent.setAttribute('class', "mainContent");
    const card = document.createElement('div')
    card.setAttribute('class', "card");
    const flag = document.createElement('div');
@@ -50,5 +57,5 @@ function createCard(name, pop, region, capital, flagURL) {
 
    details.append(Name, general);
    card.append(flag, details);
-   document.querySelector(".main-content").appendChild(card);
+   return card;
 }
