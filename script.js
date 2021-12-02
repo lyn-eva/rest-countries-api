@@ -10,3 +10,14 @@ options.onclick = e => {
       options.classList.remove('options-visible');
    }
 }
+
+fetch("https://restcountries.com/v3.1/name/germany", {method:"get"})
+.then( response => {
+   return response.json()
+})
+.then( response => {
+   console.log(response[0].coatOfArms.png);
+})
+.catch( error => {
+   console.log(error);
+})
