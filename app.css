@@ -24,6 +24,7 @@ body {
 }
 .main-ctr {
    width: 90%;
+   max-width: 1200px;
    margin: 0 auto;
 }
 header {
@@ -127,4 +128,40 @@ header button:hover {
 }
 .filter-region option:hover {
    background-color: var(--clr-d-mode-background);
+}
+
+.main-content {
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   gap: 4vw;
+}
+.card {
+   background-color: var(--clr-d-mode-elements);
+   width: 220px;
+}
+.flag img {
+   width: 100%;
+   display: block;
+}
+.details {
+   padding: 1.3rem 1.2rem;
+   color: var(--d-mode-text--l-mode-element);
+}
+.details h2 {
+   font-size: 1rem;
+   font-weight: 600;
+}
+.general-details {
+   margin: 1rem 0;
+}
+.general-details p {
+   font-size: 14px;
+   font-weight: 600;
+   margin-bottom: .4rem;
+}
+.general-details span {
+   margin-left: 4px;
+   font-weight: 300;
+   color: rgba(255, 255, 255, 0.7);
 }
