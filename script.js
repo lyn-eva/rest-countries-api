@@ -2,6 +2,7 @@ const filter = document.getElementById("filter");
 const options = document.querySelector(".options");
 const loader = document.querySelector('.loader');
 const mode = document.getElementById('mode');
+const input = document.getElementById('input');
 
 document.addEventListener("DOMContentLoaded", () => {
    let data;   
@@ -33,21 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
          filterByRegion(data, e.target.innerText);
       }
    };
+   //search with keyword
+   input.oninput = () => {
+      input.value ? searchWithKeyword(data, input.value) : neutralize(document.querySelectorAll('.card'));
+   };
+   //darkmode
    let darkMode = true;
    mode.onclick = () => {
-      const root = document.querySelector(":root");
       if (darkMode) {
-         root.style.setProperty("--clr-background", "hsl(0, 0%, 98%)");
-         root.style.setProperty("--clr-elements", "hsl(0, 0%, 100%)");
-         root.style.setProperty("--clr-elements-and-text", "hsl(200, 15%, 8%)");
-         root.style.setProperty("--clr-detail-text", "rgba(0, 0, 0, 0.7)");
+         switchTheme("hsl(0, 0%, 98%)", "hsl(0, 0%, 100%)", "hsl(200, 15%, 8%)", "rgba(0, 0, 0, 0.7)");
          darkMode = false;
       }
       else {
-         root.style.setProperty("--clr-background", "hsl(207, 26%, 17%)");
-         root.style.setProperty("--clr-elements", "hsl(209, 23%, 22%)");
-         root.style.setProperty("--clr-elements-and-text", "hsl(0, 0%, 100%)");
-         root.style.setProperty("--clr-detail-text", "rgba(255, 255, 255, 0.7)");
+         switchTheme("hsl(207, 26%, 17%)", "hsl(209, 23%, 22%)", "hsl(0, 0%, 100%)", "rgba(255, 255, 255, 0.7)");
          darkMode = true;
       }
    };
@@ -88,12 +87,33 @@ function createCard(name, pop, region, capital, flagURL) {
 
 function filterByRegion(cards, filterName) {
    const childs = document.querySelectorAll('.card');
-   childs.forEach(child => {
-      child.style.display = "block";
-   })
+   neutralize(childs);
    cards.forEach( (card, i) => {
       const {region} = card;
       if (region !== filterName)
          childs[i].style.display = "none";
+   })
+}
+
+function searchWithKeyword(cards, searchKeyword) {
+   const childs = document.querySelectorAll('.card');
+   neutralize(childs);
+   cards.forEach( (card, i) => {
+      const {name: {common}} = card;
+      if (!common.toLowerCase().startsWith(searchKeyword))
+         childs[i].style.display = "none";
+   })
+}
+function switchTheme(clr1, clr2, clr3, clr4) {
+   const root = document.querySelector(":root");
+   root.style.setProperty("--clr-background", clr1);
+   root.style.setProperty("--clr-elements", clr2);
+   root.style.setProperty("--clr-elements-and-text", clr3);
+   root.style.setProperty("--clr-detail-text", clr4);
+}
+
+function neutralize(cards) {
+   cards.forEach(card => {
+      card.style.display = "block";
    })
 }

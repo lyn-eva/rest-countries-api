@@ -8,7 +8,7 @@
    --clr-elements: hsl(209, 23%, 22%);
    --clr-background: hsl(207, 26%, 17%);
    --clr-elements-and-text: hsl(0, 0%, 100%);
-   --clr-detail-text: rgba(0, 0, 0, 0.7);
+   --clr-detail-text: rgba(255, 255, 255, 0.7);
 }
 .flex {
    display: flex;
@@ -26,7 +26,7 @@ body {
 header {
    padding: 1.3rem 0;
 }
-header, .inp-ctr input, .filter-region button, .options, .cards {
+header, .inp-ctr input, .filter-region button, .options, .card {
    background-color: var(--clr-elements);
 }
 h1, header button, .inp-ctr *, .filter-region *, .details {
@@ -68,6 +68,9 @@ header button:hover {
    border: none;
    height: 2.4rem;
    width: 100%;
+}
+.inp-ctr input:focus {
+   outline: 2px solid var(--clr-detail-text);
 }
 .inp-ctr i, .filter-region i, .options {
    position: absolute;
@@ -119,8 +122,8 @@ header button:hover {
    color: #fff;
 }
 .loader {
-   border: 4px solid #f3f3f3;
-   border-top: 4px solid var(--clr-d-mode-background);
+   border: 4px solid;
+   border-top-color: var(--clr-background);
    border-radius: 50%;
    width: 25px;
    height: 25px;
@@ -131,7 +134,6 @@ header button:hover {
    0% { transform: rotate(0deg); }
    100% { transform: rotate(360deg); }
  }
-
 .main-content {
    display: flex;
    justify-content: space-around;
