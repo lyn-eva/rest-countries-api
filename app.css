@@ -4,24 +4,19 @@
    margin: 0;
    font-family: "Nunito Sans", sans-serif;
 }
-
 :root {
    --clr-elements: hsl(209, 23%, 22%);
-   --clr-d-mode-background: hsl(207, 26%, 17%);
-   /* --clr-l-mode-text: hsl(200, 15%, 8%);
-   --clr-l-mode-input: hsl(0, 0%, 52%);
-   --clr-l-mode-background: hsl(0, 0%, 98%); */
-   --d-mode-text--l-mode-element: hsl(0, 0%, 100%);
-   --clr-detail-text: rgba(0, 0, 0, 0.7)
+   --clr-background: hsl(207, 26%, 17%);
+   --clr-elements-and-text: hsl(0, 0%, 100%);
+   --clr-detail-text: rgba(0, 0, 0, 0.7);
 }
 .flex {
    display: flex;
    align-items: center;
    justify-content: space-between;
 }
-
 body {
-   background-color: var(--clr-d-mode-background);
+   background-color: var(--clr-background);
 }
 .main-ctr {
    width: 90%;
@@ -30,10 +25,12 @@ body {
 }
 header {
    padding: 1.3rem 0;
+}
+header, .inp-ctr input, .filter-region button, .options, .cards {
    background-color: var(--clr-elements);
 }
-h1, header button {
-   color: var(--d-mode-text--l-mode-element);
+h1, header button, .inp-ctr *, .filter-region *, .details {
+   color: var(--clr-elements-and-text);
 }
 h1 {
    font-size: 1.4rem;
@@ -57,34 +54,31 @@ header button:hover {
 .inp-ctr input, .filter-region button, .options {
    border-radius: 5px;
 }
-.inp-ctr {
+.inp-ctr, .filter-region {
    position: relative;
-   font-size: 13px;
    width: 50%;
    max-width: 25rem;
+}
+.inp-ctr input, .filter-region button, .filter-region i {
+   font-size: 13px;
 }
 .inp-ctr input {
    box-sizing: border-box;
    padding-left: 2.6rem;
-   background-color: var(--clr-elements);
-   color: var(--d-mode-text--l-mode-element);
    border: none;
    height: 2.4rem;
    width: 100%;
-
-   font-size: 13px;
+}
+.inp-ctr i, .filter-region i, .options {
+   position: absolute;
 }
 .inp-ctr i {
-   position: absolute;
    left: 1rem;
    top: 12px;
-   color: var(--d-mode-text--l-mode-element);
 }
 .filter-region {
-   position: relative;
    height: 2.4rem;
    width: 10rem;
-   /* outline: 2px solid red; */
 }
 .filter-region button {
    box-sizing: border-box;
@@ -93,31 +87,21 @@ header button:hover {
    height: 100%;
    text-align: left;
    padding-left: 12px;
-   background-color: var(--clr-elements);
-   color: var(--d-mode-text--l-mode-element);
-   font-size: 13px;
    letter-spacing: 1px;
 }
 .filter-region i {
-   position: absolute;
-   color: var(--d-mode-text--l-mode-element);
    right: 10px;
    top: 13px;
-   font-size: 13px;
 }
 .options {
    opacity: 0;
    pointer-events: none;
    box-sizing: border-box;
-   position: absolute;
    top: 2.6rem;
    width: 100%;
-   background-color: var(--clr-elements);
-   font-size: 13px;
    padding: 8px 0;
 }
 .filter-region option {
-   color: var(--d-mode-text--l-mode-element);
    padding: 5px 12px;
 }
 .filter-region:hover, .filter-region button:hover {
@@ -135,8 +119,8 @@ header button:hover {
    color: #fff;
 }
 .loader {
-   border: 4px solid #f3f3f3; /* Light grey */
-   border-top: 4px solid var(--clr-d-mode-background); /* Blue */
+   border: 4px solid #f3f3f3;
+   border-top: 4px solid var(--clr-d-mode-background);
    border-radius: 50%;
    width: 25px;
    height: 25px;
@@ -156,7 +140,6 @@ header button:hover {
    margin-bottom: 2rem;
 }
 .card {
-   background-color: var(--clr-elements);
    width: 250px;
    border-radius: 5px;
    overflow: hidden;
@@ -171,7 +154,6 @@ header button:hover {
 }
 .details {
    padding: 1.3rem 1.2rem;
-   color: var(--d-mode-text--l-mode-element);
 }
 .details h2 {
    font-size: 1rem;
@@ -181,7 +163,6 @@ header button:hover {
    margin: 1rem 0;
 }
 .general-details p {
-   font-size: 14px;
    font-weight: 600;
    margin-bottom: .4rem;
 }

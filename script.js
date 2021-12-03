@@ -37,16 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
    mode.onclick = () => {
       const root = document.querySelector(":root");
       if (darkMode) {
-         root.style.setProperty("--clr-d-mode-background", "hsl(0, 0%, 98%)");
+         root.style.setProperty("--clr-background", "hsl(0, 0%, 98%)");
          root.style.setProperty("--clr-elements", "hsl(0, 0%, 100%)");
-         root.style.setProperty("--d-mode-text--l-mode-element", "hsl(200, 15%, 8%)");
+         root.style.setProperty("--clr-elements-and-text", "hsl(200, 15%, 8%)");
          root.style.setProperty("--clr-detail-text", "rgba(0, 0, 0, 0.7)");
          darkMode = false;
       }
       else {
-         root.style.setProperty("--clr-d-mode-background", "hsl(207, 26%, 17%)");
+         root.style.setProperty("--clr-background", "hsl(207, 26%, 17%)");
          root.style.setProperty("--clr-elements", "hsl(209, 23%, 22%)");
-         root.style.setProperty("--d-mode-text--l-mode-element", "hsl(0, 0%, 100%)");
+         root.style.setProperty("--clr-elements-and-text", "hsl(0, 0%, 100%)");
          root.style.setProperty("--clr-detail-text", "rgba(255, 255, 255, 0.7)");
          darkMode = true;
       }
