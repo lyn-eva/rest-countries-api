@@ -6,12 +6,13 @@
 }
 
 :root {
-   --clr-d-mode-elements: hsl(209, 23%, 22%);
+   --clr-elements: hsl(209, 23%, 22%);
    --clr-d-mode-background: hsl(207, 26%, 17%);
-   --clr-l-mode-text: hsl(200, 15%, 8%);
+   /* --clr-l-mode-text: hsl(200, 15%, 8%);
    --clr-l-mode-input: hsl(0, 0%, 52%);
-   --clr-l-mode-background: hsl(0, 0%, 98%);
+   --clr-l-mode-background: hsl(0, 0%, 98%); */
    --d-mode-text--l-mode-element: hsl(0, 0%, 100%);
+   --clr-detail-text: rgba(0, 0, 0, 0.7)
 }
 .flex {
    display: flex;
@@ -29,7 +30,7 @@ body {
 }
 header {
    padding: 1.3rem 0;
-   background-color: var(--clr-d-mode-elements);
+   background-color: var(--clr-elements);
 }
 h1, header button {
    color: var(--d-mode-text--l-mode-element);
@@ -65,7 +66,7 @@ header button:hover {
 .inp-ctr input {
    box-sizing: border-box;
    padding-left: 2.6rem;
-   background-color: var(--clr-d-mode-elements);
+   background-color: var(--clr-elements);
    color: var(--d-mode-text--l-mode-element);
    border: none;
    height: 2.4rem;
@@ -92,7 +93,7 @@ header button:hover {
    height: 100%;
    text-align: left;
    padding-left: 12px;
-   background-color: var(--clr-d-mode-elements);
+   background-color: var(--clr-elements);
    color: var(--d-mode-text--l-mode-element);
    font-size: 13px;
    letter-spacing: 1px;
@@ -111,7 +112,7 @@ header button:hover {
    position: absolute;
    top: 2.6rem;
    width: 100%;
-   background-color: var(--clr-d-mode-elements);
+   background-color: var(--clr-elements);
    font-size: 13px;
    padding: 8px 0;
 }
@@ -155,8 +156,14 @@ header button:hover {
    margin-bottom: 2rem;
 }
 .card {
-   background-color: var(--clr-d-mode-elements);
+   background-color: var(--clr-elements);
    width: 250px;
+   border-radius: 5px;
+   overflow: hidden;
+}
+.card:hover {
+   cursor: pointer;
+   opacity: .9;
 }
 .flag img {
    width: 100%;
@@ -181,5 +188,5 @@ header button:hover {
 .general-details span {
    margin-left: 4px;
    font-weight: 300;
-   color: rgba(255, 255, 255, 0.7);
+   color: var(--clr-detail-text);
 }
