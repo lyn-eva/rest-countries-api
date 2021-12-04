@@ -100,10 +100,11 @@ function searchWithKeyword(cards, searchKeyword) {
    neutralize(childs);
    cards.forEach( (card, i) => {
       const {name: {common}} = card;
-      if (!common.toLowerCase().startsWith(searchKeyword))
+      if (!common.toLowerCase().includes(searchKeyword))
          childs[i].style.display = "none";
    })
 }
+
 function switchTheme(clr1, clr2, clr3, clr4) {
    const root = document.querySelector(":root");
    root.style.setProperty("--clr-background", clr1);
