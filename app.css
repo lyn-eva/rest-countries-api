@@ -8,7 +8,7 @@
    --clr-elements: hsl(209, 23%, 22%);
    --clr-background: hsl(207, 26%, 17%);
    --clr-elements-and-text: hsl(0, 0%, 100%);
-   --clr-detail-text: rgba(255, 255, 255, 0.7);
+   --clr-detail-text: rgba(255, 255, 255, 0.8);
 }
 .flex {
    display: flex;
@@ -17,6 +17,7 @@
 }
 body {
    background-color: var(--clr-background);
+   transition: 300ms;
 }
 .main-ctr {
    width: 90%;
@@ -28,6 +29,7 @@ header {
 }
 header, .inp-ctr input, .filter-region button, .options, .card {
    background-color: var(--clr-elements);
+   transition: 300ms;
 }
 h1, header button, .inp-ctr *, .filter-region *, .details {
    color: var(--clr-elements-and-text);
@@ -168,8 +170,95 @@ header button:hover {
    font-weight: 600;
    margin-bottom: .4rem;
 }
-.general-details span {
+.general-details span, .country-details span {
    margin-left: 4px;
    font-weight: 300;
    color: var(--clr-detail-text);
 }
+
+.more-details {
+   margin: 3rem 0 0;
+   display: none;
+}
+.more-details * {
+   color: var(--clr-elements-and-text);
+}
+.more-details button {
+   box-sizing: border-box;
+   width: 5.5rem;
+   height: 1.9rem;
+   background-color: var(--clr-elements);
+   border: none;
+   font-size: 13px;
+   border-radius: 5px;
+   transition: 300ms;
+}
+.more-details button:hover {
+   cursor: pointer;
+   outline: 1px solid var(--clr-elements-and-text);
+}
+.back {
+   margin-bottom: 3rem;
+}
+.back i{
+   margin-right: 8px;
+}
+.detail-ctr {
+   /* display: flex; */
+   justify-content: space-between;
+}
+.more-details .flag {
+   width: 40%;
+   /* height: 300px; */
+   /* border: 2px solid #fff; */
+}
+.country {
+   /* display: flex; */
+   width: 48%;
+}
+.country-details {
+   align-items: flex-start;
+   margin: 1.7rem 0 2.5rem;
+}
+.country-details p {
+   font-weight: 600;
+   margin-bottom: .4rem;
+}
+.col-1 {
+   width: 35%;
+   min-width: 200px;
+}
+.col-2 {
+   max-width: 200px;
+}
+.borders button {
+   width: 5.5rem;
+   margin-left: .4rem;
+}
+/* <div class="more-details">
+<div class="back"><button type="button">Back</button></div>
+<div class="flag"></div>
+<div class="country">
+   <h2>Belgium</h2>
+   <div class="country-details">
+      <div class="col-1">
+         <p>Native Name: <span>Belgie</span></p>
+         <p>Native Name: <span>Belgie</span></p>
+         <p>Native Name: <span>Belgie</span></p>
+         <p>Native Name: <span>Belgie</span></p>
+         <p>Native Name: <span>Belgie</span></p>
+      </div>
+      <div class="col-2">
+         <p>Native Name: <span>Belgie</span></p>
+         <p>Native Name: <span>Belgie</span></p>
+         <p>Native Name: <span>Belgie</span></p>
+      </div>
+   </div>
+   <div class="border-countries">
+      <span>Border Countries: </span>
+      <button type="button">France</button>
+      <button type="button">Germany</button>
+      <button type="button">Netherlands</button>
+   </div>
+</div>
+</div> */
