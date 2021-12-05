@@ -177,7 +177,7 @@ header button:hover {
 }
 
 .more-details {
-   margin: 3rem 0 0;
+   margin: 3rem 0;
    display: none;
 }
 .more-details * {
@@ -203,12 +203,13 @@ header button:hover {
 .back i{
    margin-right: 8px;
 }
-.detail-ctr {
+.details-ctr {
    /* display: flex; */
    justify-content: space-between;
 }
 .more-details .flag {
    width: 40%;
+   min-width: 320px;
    /* height: 300px; */
    /* border: 2px solid #fff; */
 }
@@ -235,30 +236,45 @@ header button:hover {
    width: 5.5rem;
    margin-left: .4rem;
 }
-/* <div class="more-details">
-<div class="back"><button type="button">Back</button></div>
-<div class="flag"></div>
-<div class="country">
-   <h2>Belgium</h2>
-   <div class="country-details">
-      <div class="col-1">
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Native Name: <span>Belgie</span></p>
-      </div>
-      <div class="col-2">
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Native Name: <span>Belgie</span></p>
-      </div>
-   </div>
-   <div class="border-countries">
-      <span>Border Countries: </span>
-      <button type="button">France</button>
-      <button type="button">Germany</button>
-      <button type="button">Netherlands</button>
-   </div>
-</div>
-</div> */
+
+@media (max-width: 950px) {
+   .country-details {
+      flex-direction: column;
+      margin: 1rem 0;
+   }
+   .country {
+      width: 43%;
+   }
+   .col-1 {
+      width: 100%;
+      margin-bottom: 1rem;
+   }
+   .country-details p {
+      font-size: 14px;
+   }
+   .borders span {
+      display: block;
+      margin-bottom: .5rem;
+   }
+   .borders button:nth-child(2) {
+      margin-left: 0;
+   }
+}
+
+@media (max-width: 720px) {
+   .details-ctr {
+      flex-direction: column;
+      max-width: 350px;
+      margin: 0 auto;
+   }
+
+   .more-details .flag {
+      min-width: initial;
+      width: 100%;
+   }
+
+   .country {
+      margin-top: 1.5rem;
+      width: 100%;
+   }
+}

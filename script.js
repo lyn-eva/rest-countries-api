@@ -4,9 +4,10 @@ const loader = document.querySelector('.loader');
 const mode = document.getElementById('mode');
 const input = document.getElementById('input');
 const main = document.querySelector(".main-hdr");
+const more = document.querySelector('.more-details');
 
 document.addEventListener("DOMContentLoaded", () => {
-   let data;   
+   let data, codes;   
    fetch("https://restcountries.com/v3.1/all", { method: "get" })
    .then((response) => {
       // console.log(response.json());
@@ -14,10 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
    })
    .then((response) => {
       console.log(response);
-      data = response;
       const mainContent = generateCards(response);
+      data = response;
+      codes = mainContent[1];
       loader.style.display = "none";
-      main.after(mainContent);
+      main.after(mainContent[0]);
+      console.log(codes);
    })
    .catch((error) => {
       console.log(error);  
@@ -52,29 +55,34 @@ document.addEventListener("DOMContentLoaded", () => {
          darkMode = true;
       }
    };
+   more.firstElementChild.onclick = () => { //back key
+      main.nextElementSibling.style.display = "flex";
+      more.lastElementChild.remove();
+   }
 });
    
 function generateCards(cards) {
-   const more = document.querySelector('.more-details');
    const mainContent = document.createElement('div');
    mainContent.setAttribute('class', "main-content");
+   let codes = {};
 
    cards.forEach((cd, i) => {
-      const {name: { common }, population,region, capital, flags: { png },} = cd;
+      const {name: { common }, cca3, population,region, capital, flags: { png },} = cd;
       const temp = createCard(common, population, region, capital, png);   
       temp.setAttribute('id', i);
       mainContent.appendChild(temp);
+      codes[cca3] = common;
 
       temp.addEventListener('click', () => {
          if (!more.firstElementChild.nextElementSibling) {
             main.nextElementSibling.style.display = "none";
             more.style.display = "block";
-            more.firstElementChild.after(moreDetailsPage(cards, i));
+            more.firstElementChild.after(moreDetailsPage(cards, i, codes));
          }
       });
    });
 
-   return mainContent;
+   return [mainContent, codes];
 }
 
 function createCard(name, pop, region, capital, flagURL) {
@@ -131,7 +139,7 @@ function neutralize(cards) {
    })
 }
 
-function moreDetailsPage(cards, id) {
+function moreDetailsPage(cards, id, codes) {
    const DetailsCtr = document.createElement('div');
    DetailsCtr.setAttribute("class", 'details-ctr flex');
    const flag = document.createElement('div');
@@ -146,45 +154,23 @@ function moreDetailsPage(cards, id) {
    col1.setAttribute("class", 'col-1');
    const col2 = document.createElement('div');
    col2.setAttribute("class", 'col-2');
-   const borders = document.createElement('div');
-   borders.setAttribute("class", 'borders');
+   const border = document.createElement('div');
+   border.setAttribute("class", 'borders');
 
-   const {name : {common, nativeName}, flags: {svg}, population, region, subregion, capital, tld, currencies, languages} = cards[id];
+   const {name : {common, nativeName}, borders, flags: {svg}, population, region, subregion, capital, tld, currencies, languages} = cards[id];
    h2.innerHTML = common;
    flag.innerHTML = `<img src=${svg} alt=${common}>`;
-   col1.innerHTML = `<p>Native Name: <span>${nativeName[Object.keys(nativeName)[0]].official}</span></p><p>Population: <span>${population}</span></p><p>Region: <span>${region}</span></p><p>Sub Region: <span>${subregion}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
-   col2.innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${currencies[Object.keys(currencies)].name}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p>`;
-   borders.innerHTML = `<span>Border Countries: </span><button type="button"></button><button type="button"></button><button type="button"></button>`;
-
+   col1.innerHTML = `<p>Native Name: <span>${nativeName[Object.keys(nativeName)[0]].official}</span></p><p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Sub Region: <span>${subregion}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
+   col2.innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${currencies[Object.keys(currencies)].name}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p>`;  
+   if (borders) {
+      border.innerHTML = "<span>Border Countries: </span>"
+      borders.slice(0, 3).forEach( br => {
+         border.innerHTML += `<button type="button">${codes[br]}</button>`;
+      })
+   }
    countryDetails.append(col1, col2);
-   country.append(h2, countryDetails, borders);
+   country.append(h2, countryDetails, border);
    DetailsCtr.append(flag, country);
 
    return DetailsCtr;
 }
-{/* <div class="details-ctr flex">
-<div class="flag"></div>
-<div class="country">
-   <h2>Belgium</h2>
-   <div class="country-details flex">
-      <div class="col-1">
-         <p>Native Name: <span>Belgie</span></p>
-         <p>Population: <span>Belgie</span></p>
-         <p>Region: <span>Belgie</span></p>
-         <p>Sub Region: <span>Belgie</span></p>
-         <p>Capital: <span>Belgie</span></p>
-      </div>
-      <div class="col-2">
-         <p>Top Level Domain: <span>Belgie</span></p>
-         <p>Currencies: <span>Belgie</span></p>
-         <p>Languages: <span>Dutch, French, German</span></p>
-      </div>
-   </div>
-   <div class="borders">
-      <span>Border Countries: </span>
-      <button type="button">France</button>
-      <button type="button">Germany</button>
-      <button type="button">Netherlands</button>
-   </div>
-</div>
-</div> */}
