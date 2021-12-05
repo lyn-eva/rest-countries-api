@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
    })
    .then((response) => {
-      console.log(response);
       const mainContent = generateCards(response);
       data = response;
       loader.style.display = "none";
@@ -80,7 +79,6 @@ function generateCards(cards) {
          more.firstElementChild.after(moreDetailsPage(cards, i, codes));
       });
    });
-   console.log(codes);
    return mainContent;
 }
 
@@ -163,7 +161,6 @@ function moreDetailsPage(cards, i, codes) {
    addInnerHtml(h2, flag, col1, col2, border, cards, i, codes);
    border.onclick =  e => {
       if (e.target.tagName !== "BUTTON") return
-      console.log(e.target.dataset.id);
       addInnerHtml(h2, flag, col1, col2, border, cards, e.target.dataset.id, codes);
    };
    return DetailsCtr;
