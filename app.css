@@ -27,7 +27,7 @@ body {
 header {
    padding: 1.3rem 0;
 }
-header, .inp-ctr input, .filter-region button, .options, .card {
+header, .inp-ctr input, .filter-region *, .card {
    background-color: var(--clr-elements);
    transition: 300ms;
 }
@@ -45,6 +45,7 @@ header button {
    border: none;
    font-weight: 600;
    font-size: 1rem;
+
 }
 header button:hover {
    cursor: pointer;
@@ -53,7 +54,7 @@ header button:hover {
 .main-hdr {
    padding: 2rem 0;
 }
-.inp-ctr input, .filter-region button, .options {
+.inp-ctr input, .filter-region, .filter-region * {
    border-radius: 5px;
 }
 .inp-ctr, .filter-region {
@@ -63,6 +64,9 @@ header button:hover {
 }
 .inp-ctr input, .filter-region button, .filter-region i {
    font-size: 13px;
+}
+.inp-ctr input, .filter-region, .more-details button {
+   box-shadow: 0 0 4px rgba(0, 0, 0, 0.151);
 }
 .inp-ctr input {
    box-sizing: border-box;
@@ -94,6 +98,9 @@ header button:hover {
    padding-left: 12px;
    letter-spacing: 1px;
 }
+.filter-region button:focus {
+   outline: 2px solid var(--clr-elements-and-text);
+}
 .filter-region i {
    right: 10px;
    top: 13px;
@@ -118,6 +125,7 @@ header button:hover {
 }
 .filter-region option:hover {
    background-color: var(--clr-d-mode-background);
+   outline: 1px solid var(--clr-elements-and-text);
 }
 .notification{
    text-align: center;
@@ -150,7 +158,7 @@ header button:hover {
 }
 .card:hover {
    cursor: pointer;
-   opacity: .9;
+   outline: 1px solid var(--clr-elements-and-text);
 }
 .flag img {
    width: 100%;
@@ -175,7 +183,6 @@ header button:hover {
    font-weight: 300;
    color: var(--clr-detail-text);
 }
-
 .more-details {
    margin: 3rem 0;
    display: none;
@@ -192,6 +199,7 @@ header button:hover {
    font-size: 13px;
    border-radius: 5px;
    transition: 300ms;
+   box-shadow: 0 0 4px rgba(0, 0, 0, 0.151);
 }
 .more-details button:hover {
    cursor: pointer;
@@ -223,7 +231,7 @@ header button:hover {
 }
 .country-details p {
    font-weight: 600;
-   margin-bottom: .4rem;
+   margin-bottom: .5rem;
 }
 .col-1 {
    width: 35%;
@@ -267,14 +275,45 @@ header button:hover {
       max-width: 350px;
       margin: 0 auto;
    }
-
+   .more-details {
+      margin-top: 1rem;
+   }
    .more-details .flag {
       min-width: initial;
       width: 100%;
    }
-
    .country {
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       width: 100%;
+   }
+   .borders {
+      text-align: center;
+   }
+}
+
+@media (max-width: 450px) {
+   h1 {
+      font-size: 1.1rem;
+   }
+   header i {
+      margin-right: 0;
+   }
+   header button {
+      text-align: right;
+      font-size: 13px;
+   }
+   .main-hdr {
+      display: block;
+   }
+   .inp-ctr {
+      width: 100%;
+      max-width: 25rem;
+   }
+   .filter-region {
+      margin-top: 2rem;
+      width: 60%;
+   }
+   .borders button {
+      width: 4.5rem;
    }
 }

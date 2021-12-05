@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
    };
    more.firstElementChild.onclick = () => { //back key
       main.nextElementSibling.style.display = "flex";
+      main.style.display = "flex";
       more.lastElementChild.remove();
    }
 });
@@ -76,6 +77,7 @@ function generateCards(cards) {
       temp.addEventListener('click', () => {
          if (!more.firstElementChild.nextElementSibling) {
             main.nextElementSibling.style.display = "none";
+            main.style.display = "none";
             more.style.display = "block";
             more.firstElementChild.after(moreDetailsPage(cards, i, codes));
          }
