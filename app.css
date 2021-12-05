@@ -139,11 +139,11 @@ header button:hover {
    height: 25px;
    animation: spin 1.3s linear infinite;
    margin: 3rem auto 2rem;
- }
- @keyframes spin {
+}
+@keyframes spin {
    0% { transform: rotate(0deg); }
    100% { transform: rotate(360deg); }
- }
+}
 .main-content {
    display: flex;
    justify-content: space-around;
@@ -192,7 +192,6 @@ header button:hover {
 }
 .more-details button {
    box-sizing: border-box;
-   width: 5.5rem;
    height: 1.9rem;
    background-color: var(--clr-elements);
    border: none;
@@ -200,6 +199,9 @@ header button:hover {
    border-radius: 5px;
    transition: 300ms;
    box-shadow: 0 0 4px rgba(0, 0, 0, 0.151);
+}
+.back button {
+   width: 5.5rem;
 }
 .more-details button:hover {
    cursor: pointer;
@@ -212,17 +214,13 @@ header button:hover {
    margin-right: 8px;
 }
 .details-ctr {
-   /* display: flex; */
    justify-content: space-between;
 }
 .more-details .flag {
    width: 40%;
    min-width: 320px;
-   /* height: 300px; */
-   /* border: 2px solid #fff; */
 }
 .country {
-   /* display: flex; */
    width: 48%;
 }
 .country-details {
@@ -241,10 +239,9 @@ header button:hover {
    max-width: 200px;
 }
 .borders button {
-   width: 5.5rem;
+   padding: 0 8px;
    margin-left: .4rem;
 }
-
 @media (max-width: 950px) {
    .country-details {
       flex-direction: column;
@@ -268,7 +265,6 @@ header button:hover {
       margin-left: 0;
    }
 }
-
 @media (max-width: 720px) {
    .details-ctr {
       flex-direction: column;
@@ -290,7 +286,6 @@ header button:hover {
       text-align: center;
    }
 }
-
 @media (max-width: 450px) {
    h1 {
       font-size: 1.1rem;
@@ -314,6 +309,5 @@ header button:hover {
       width: 60%;
    }
    .borders button {
-      width: 4.5rem;
    }
 }
