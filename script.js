@@ -63,12 +63,11 @@ function generateCards(cards) {
    const mainContent = document.createElement('div');
    mainContent.setAttribute('class', "main-content");
    let codes = {};
-   console.log(codes);
 
    cards.forEach((cd, i) => {
       const {name: { common }, cca3, population,region, capital, flags: { png },} = cd;
       const temp = createCard(common, population, region, capital, png);   
-      temp.setAttribute('data-id', i); //
+      // temp.setAttribute('data-id', i); //
       mainContent.appendChild(temp);
       codes[cca3] = [common, i];
       
@@ -166,7 +165,6 @@ function moreDetailsPage(cards, i, codes) {
       console.log(e.target.dataset.id);
       addInnerHtml(h2, flag, col1, col2, border, cards, e.target.dataset.id, codes);
    };
-
    return DetailsCtr;
 }
 
@@ -176,13 +174,10 @@ function addInnerHtml(h2, flag, col1, col2, border, cards, i, codes) {
    flag.innerHTML = `<img src=${svg} alt=${common}>`;
    col1.innerHTML = `<p>Native Name: <span>${nativeName[Object.keys(nativeName)[0]].official}</span></p><p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Sub Region: <span>${subregion}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
    col2.innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${currencies[Object.keys(currencies)].name}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p>`;  
-   if (!borders) return
-   border.innerHTML = "<span>Border Countries: </span>"
-   borders.slice(0, 3).forEach( br => {
-      border.insertAdjacentHTML("Beforeend", `<button type="button" data-id=${codes[br][1]}>${codes[br][0]}</button>`);
-   });
-}
-
-function viewBorderCountries() {
-
+   if (borders) {
+      border.innerHTML = "<span>Border Countries: </span>"
+      borders.slice(0, 3).forEach( br => {
+         border.insertAdjacentHTML("Beforeend", `<button type="button" data-id=${codes[br][1]}>${codes[br][0]}</button>`);
+      });
+   }
 }

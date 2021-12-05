@@ -240,7 +240,7 @@ header button:hover {
 }
 .borders button {
    padding: 0 8px;
-   margin-left: .4rem;
+   margin: .4rem 0 0 .4rem;
 }
 @media (max-width: 950px) {
    .country-details {
@@ -298,16 +298,25 @@ header button:hover {
       font-size: 13px;
    }
    .main-hdr {
-      display: block;
+      flex-direction: column;
+      align-items: flex-start;
    }
    .inp-ctr {
       width: 100%;
       max-width: 25rem;
    }
-   .filter-region {
-      margin-top: 2rem;
-      width: 60%;
+   .inp-ctr input, .filter-region button {
+      font-size: 12px;
    }
-   .borders button {
+   .filter-region {
+      margin-top: 1.7rem;
+      width: 60%;
+      min-width: 9rem;
+   }
+   .main-content {
+      gap: 2rem;
+   }
+   .col-1 {
+      min-width: initial;
    }
 }
