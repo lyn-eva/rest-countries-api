@@ -6,16 +6,19 @@ const input = document.getElementById('input');
 const main = document.querySelector(".main-hdr");
 const more = document.querySelector('.more-details');
 
+let history = [];// i don't wan't to declare it here, however
+
 document.addEventListener("DOMContentLoaded", () => {
    'use strict';
-   let data;   
+   let data, codes;   
    fetch("https://restcountries.com/v3.1/all", { method: "get" })
    .then((response) => {
       return response.json();
    })
    .then((response) => {
-      const mainContent = generateCards(response);
       data = response;
+      codes = response.reduce((obj, cd, i) => ({...obj, [cd.cca3] : [cd.name.common, i]}), {});
+      const mainContent = generateCards(response, codes);
       loader.style.display = "none";
       main.after(mainContent);
    })
@@ -29,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
    };
    //filter by region
    options.onclick = (e) => {
-      if (e.target.tagName == "OPTION") {
+      if (e.target.className == "option") {
          filter.innerText = e.target.innerText;
          options.classList.remove("options-visible");
    
@@ -52,21 +55,30 @@ document.addEventListener("DOMContentLoaded", () => {
          darkMode = true;
       }
    };
+   let first = true;
    more.firstElementChild.onclick = () => { //back key
-      main.nextElementSibling.style.display = "flex";
-      main.style.display = "flex";
-      more.style.display = "none";
-      more.lastElementChild.remove();
+      if (first) {
+         history.pop();
+         first = false;
+      }
+      if (history.length) { // recorded history
+         addInnerHtml(data, history.pop(), codes);
+      }  
+      else {
+         main.nextElementSibling.style.display = "flex";
+         main.style.display = "flex";
+         more.style.display = "none";
+         more.lastElementChild.remove();
+         first = true;
+      } 
    }
 });
    
-function generateCards(cards) {
+function generateCards(cards, codes) {
    const mainContent = document.createElement('div');
    mainContent.setAttribute('class', "main-content");
-   let codes = cards.reduce((obj, cd, i) => ({...obj, [cd.cca3] : [cd.name.common, i]}), {});
    cards.forEach((cd, i) => {
-      const {name: { common }, cca3, population,region, capital, flags: { png },} = cd;
-      const temp = createCard(common, population, region, capital, png);   
+      const temp = createCard(cd);   
       temp.setAttribute('data-id', i); //
       mainContent.appendChild(temp);
       
@@ -76,14 +88,15 @@ function generateCards(cards) {
          main.style.display = "none";
          more.style.display = "block";
          more.firstElementChild.after(moreDetailsPage(cards, codes));
-         addInnerHtml(cards, i, codes);
-         
+         addInnerHtml(cards, i, codes);       
+         history.push(i);
       });
    });
    return mainContent;
 }
 
-function createCard(name, pop, region, capital, flagURL) {
+function createCard(cd) {
+   const {name: { common }, population,region, capital, flags: { png },} = cd;
    const card = document.createElement('div')
    card.setAttribute('class', "card");
    const flag = document.createElement('div');
@@ -93,10 +106,10 @@ function createCard(name, pop, region, capital, flagURL) {
    const general = document.createElement('div');
    general.setAttribute('class', "general-details");
    const Name = document.createElement('h1');
-   Name.innerHTML = name;
+   Name.innerHTML = common;
    
-   flag.innerHTML = `<img src=${flagURL} alt=${name}>`;
-   general.innerHTML = `<p>Population: <span>${pop.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
+   flag.innerHTML = `<img src=${png} alt=${common}>`;
+   general.innerHTML = `<p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
 
    details.append(Name, general);
    card.append(flag, details);
@@ -141,7 +154,7 @@ function moreDetailsPage(cards, codes) {
    const flag = document.createElement('div');
    flag.setAttribute("class", 'flag');
    const h2 = document.createElement('h2');
-   h2.setAttribute("id", 'country-name');
+   // h2.setAttribute("id", 'country-name');
    const country = document.createElement('div');
    country.setAttribute("class", 'country');
    const countryDetails = document.createElement('div');
@@ -160,20 +173,22 @@ function moreDetailsPage(cards, codes) {
    border.onclick =  e => {
       if (e.target.tagName !== "BUTTON") return
       addInnerHtml(cards, e.target.dataset.id, codes);
+      history.push(e.target.dataset.id);
    };
    return DetailsCtr;
 }
 
 function addInnerHtml(cards, i, codes) {
    const {name : {common, nativeName}, borders, flags: {svg}, population, region, subregion, capital, tld, currencies, languages} = cards[i];
-   document.getElementById("country-name").innerHTML = common;
+   document.querySelector(".country h2").innerHTML = common;
    document.querySelector(".details-ctr .flag").innerHTML = `<img src=${svg} alt=${common}>`;
    document.querySelector(".col-1").innerHTML = `<p>Native Name: <span>${nativeName[Object.keys(nativeName)[0]].official}</span></p><p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Sub Region: <span>${subregion}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
-   document.querySelector(".col-2").innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${currencies[Object.keys(currencies)].name}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p>`;  
+   document.querySelector(".col-2").innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${Object.values(currencies).map(cc => cc.name).join(", ")}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p>`;  
    const border = document.querySelector(".borders");
 
-   if (borders) {
-      border.innerHTML = "<span>Border Countries: </span>"
+   // LOGIC: it's not necessary to remove innerHTML if no border countries, as you won't need to call this function again for countries who don't have border countries in the first place 
+   if (borders) { 
+      border.innerHTML = "<span>Border Countries: </span>";
       borders.slice(0, 3).forEach( br => {
          border.insertAdjacentHTML("Beforeend", `<button type="button" data-id=${codes[br][1]}>${codes[br][0]}</button>`);
       });

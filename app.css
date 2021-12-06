@@ -48,7 +48,6 @@ header button {
 
 }
 header button:hover {
-   cursor: pointer;
    opacity: .8;
 }
 .main-hdr {
@@ -113,17 +112,17 @@ header button:hover {
    width: 100%;
    padding: 8px 0;
 }
-.filter-region option {
+.filter-region .option {
    padding: 5px 12px;
 }
-.filter-region:hover, .filter-region button:hover {
+.filter-region:hover, .filter-region button:hover, .card:hover, .more-details button:hover, header button {
    cursor: pointer;
 }
 .options-visible {
    opacity: 1;
    pointer-events: initial;
 }
-.filter-region option:hover {
+.filter-region .option:hover {
    background-color: var(--clr-d-mode-background);
    outline: 1px solid var(--clr-elements-and-text);
 }
@@ -157,7 +156,6 @@ header button:hover {
    overflow: hidden;
 }
 .card:hover {
-   cursor: pointer;
    outline: 1px solid var(--clr-elements-and-text);
 }
 .flag img {
@@ -204,7 +202,6 @@ header button:hover {
    width: 5.5rem;
 }
 .more-details button:hover {
-   cursor: pointer;
    outline: 1px solid var(--clr-elements-and-text);
 }
 .back {
@@ -232,7 +229,7 @@ header button:hover {
    margin-bottom: .5rem;
 }
 .col-1 {
-   width: 35%;
+   width: 45%;
    min-width: 200px;
 }
 .col-2 {
@@ -250,9 +247,14 @@ header button:hover {
    .country {
       width: 43%;
    }
-   .col-1 {
+   .col-1, .col-2 {
       width: 100%;
+   }
+   .col-1 {
       margin-bottom: 1rem;
+   }
+   .col-2 {
+      max-width: initial;
    }
    .country-details p {
       font-size: 14px;
@@ -271,13 +273,12 @@ header button:hover {
    .more-details {
       margin-top: 1rem;
    }
-   .more-details .flag {
+   .more-details .flag, .country, .col-1 {
       min-width: initial;
       width: 100%;
    }
    .country {
       margin-top: 2rem;
-      width: 100%;
    }
    .borders {
       text-align: center;
@@ -292,7 +293,6 @@ header button:hover {
    }
    header button {
       text-align: right;
-      font-size: 13px;
    }
    .main-hdr {
       flex-direction: column;
@@ -302,7 +302,7 @@ header button:hover {
       width: 100%;
       max-width: 25rem;
    }
-   .inp-ctr input, .filter-region button {
+   .inp-ctr input, .filter-region button, header button {
       font-size: 12px;
    }
    .filter-region {
@@ -312,8 +312,5 @@ header button:hover {
    }
    .main-content {
       gap: 2rem;
-   }
-   .col-1 {
-      min-width: initial;
    }
 }
