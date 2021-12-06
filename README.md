@@ -14,4 +14,4 @@ This is a web app about country details around the world.
 - Vanilla JS
 
 This is a challenge from a amazing website called frontend mentor.
-[view challenge](https://www.frontendmentor.io/challenges?sort=difficulty|asc&difficulties=4)
+ [view challenge](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca)
