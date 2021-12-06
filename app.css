@@ -240,7 +240,7 @@ header button:hover {
 }
 .borders button {
    padding: 0 8px;
-   margin: .4rem 0 0 .4rem;
+   margin: .4rem .4rem 0 0;
 }
 @media (max-width: 950px) {
    .country-details {
@@ -260,9 +260,6 @@ header button:hover {
    .borders span {
       display: block;
       margin-bottom: .5rem;
-   }
-   .borders button:nth-child(2) {
-      margin-left: 0;
    }
 }
 @media (max-width: 720px) {
