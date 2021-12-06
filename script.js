@@ -6,7 +6,7 @@ const input = document.getElementById('input');
 const main = document.querySelector(".main-hdr");
 const more = document.querySelector('.more-details');
 
-let history = [];// i don't wan't to declare it here, however
+let history = []; //stack data structure is perfect fit to record the clicked countries :)
 
 document.addEventListener("DOMContentLoaded", () => {
    'use strict';
@@ -55,12 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
          darkMode = true;
       }
    };
-   let first = true;
    more.firstElementChild.onclick = () => { //back key
-      if (first) {
-         history.pop();
-         first = false;
-      }
       if (history.length) { // recorded history
          addInnerHtml(data, history.pop(), codes);
       }  
@@ -69,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
          main.style.display = "flex";
          more.style.display = "none";
          more.lastElementChild.remove();
-         first = true;
       } 
    }
 });
@@ -87,9 +81,8 @@ function generateCards(cards, codes) {
          main.nextElementSibling.style.display = "none";
          main.style.display = "none";
          more.style.display = "block";
-         more.firstElementChild.after(moreDetailsPage(cards, codes));
+         more.firstElementChild.after(moreDetailsPage(cards, i, codes));
          addInnerHtml(cards, i, codes);       
-         history.push(i);
       });
    });
    return mainContent;
@@ -148,7 +141,7 @@ function neutralize(cards) {
    cards.forEach(card => card.style.display = "block");
 }
 
-function moreDetailsPage(cards, codes) {
+function moreDetailsPage(cards, i, codes) {
    const DetailsCtr = document.createElement('div');
    DetailsCtr.setAttribute("class", 'details-ctr flex');
    const flag = document.createElement('div');
@@ -157,6 +150,7 @@ function moreDetailsPage(cards, codes) {
    // h2.setAttribute("id", 'country-name');
    const country = document.createElement('div');
    country.setAttribute("class", 'country');
+   country.setAttribute("data-id", i);
    const countryDetails = document.createElement('div');
    countryDetails.setAttribute("class", 'country-details flex');
    const col1 = document.createElement('div');
@@ -172,13 +166,16 @@ function moreDetailsPage(cards, codes) {
 
    border.onclick =  e => {
       if (e.target.tagName !== "BUTTON") return
+      const cc = e.currentTarget.parentElement.dataset.id;
+      history.push(cc);
       addInnerHtml(cards, e.target.dataset.id, codes);
-      history.push(e.target.dataset.id);
    };
    return DetailsCtr;
 }
 
 function addInnerHtml(cards, i, codes) {
+   document.querySelector(".country").setAttribute("data-id", i);//
+
    const {name : {common, nativeName}, borders, flags: {svg}, population, region, subregion, capital, tld, currencies, languages} = cards[i];
    document.querySelector(".country h2").innerHTML = common;
    document.querySelector(".details-ctr .flag").innerHTML = `<img src=${svg} alt=${common}>`;
