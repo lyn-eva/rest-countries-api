@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
    more.firstElementChild.onclick = () => { //back key
       main.nextElementSibling.style.display = "flex";
       main.style.display = "flex";
-      more.firstElementChild.style.display = "none";
+      more.style.display = "none";
       more.lastElementChild.remove();
    }
 });
