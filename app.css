@@ -4,6 +4,9 @@
    margin: 0;
    font-family: "Nunito Sans", sans-serif;
 }
+a {
+   text-decoration: none;
+}
 :root {
    --clr-elements: hsl(209, 23%, 22%);
    --clr-background: hsl(207, 26%, 17%);
@@ -115,7 +118,7 @@ header button:hover {
 .filter-region .option {
    padding: 5px 12px;
 }
-.filter-region:hover, .filter-region button:hover, .card:hover, .more-details button:hover, header button {
+.filter-region:hover, .filter-region button:hover, .card:hover, .more-details button:hover, header button:hover, a:hover {
    cursor: pointer;
 }
 .options-visible {
@@ -164,10 +167,6 @@ header button:hover {
 }
 .details {
    padding: 1.3rem 1.2rem;
-}
-.details h2 {
-   font-size: 1rem;
-   font-weight: 600;
 }
 .general-details {
    margin: 1rem 0;
@@ -227,6 +226,19 @@ header button:hover {
 .country-details p {
    font-weight: 600;
    margin-bottom: .5rem;
+}
+.col-2 a{
+   color: rgb(255, 179, 66);
+}
+.col-2 a i {
+   color: inherit;
+   margin-left: 9px;
+}
+.col-2 a:hover {
+   border-bottom: 1px solid;
+}
+.col-2 a:visited {
+   color: rgb(192, 162, 118);
 }
 .col-1 {
    width: 45%;

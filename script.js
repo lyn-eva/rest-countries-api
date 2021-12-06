@@ -9,13 +9,13 @@ const more = document.querySelector('.more-details');
 let history = []; //stack data structure is perfect fit to record the clicked countries :)
 
 document.addEventListener("DOMContentLoaded", () => {
-   'use strict';
    let data, codes;   
    fetch("https://restcountries.com/v3.1/all", { method: "get" })
    .then((response) => {
       return response.json();
    })
    .then((response) => {
+      console.log(response);
       data = response;
       codes = response.reduce((obj, cd, i) => ({...obj, [cd.cca3] : [cd.name.common, i]}), {});
       const mainContent = generateCards(response, codes);
@@ -77,7 +77,7 @@ function generateCards(cards, codes) {
       mainContent.appendChild(temp);
       
       temp.addEventListener('click', () => {
-         if (more.firstElementChild.nextElementSibling) return
+         if (more.children.length == 2) return
          main.nextElementSibling.style.display = "none";
          main.style.display = "none";
          more.style.display = "block";
@@ -98,8 +98,8 @@ function createCard(cd) {
    details.setAttribute('class', "details");
    const general = document.createElement('div');
    general.setAttribute('class', "general-details");
-   const Name = document.createElement('h1');
-   Name.innerHTML = common;
+   const Name = document.createElement('h2');
+   Name.innerText = common;
    
    flag.innerHTML = `<img src=${png} alt=${common}>`;
    general.innerHTML = `<p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
@@ -176,11 +176,11 @@ function moreDetailsPage(cards, i, codes) {
 function addInnerHtml(cards, i, codes) {
    document.querySelector(".country").setAttribute("data-id", i);//
 
-   const {name : {common, nativeName}, borders, flags: {svg}, population, region, subregion, capital, tld, currencies, languages} = cards[i];
-   document.querySelector(".country h2").innerHTML = common;
+   const {name : {common, nativeName}, borders, flags: {svg}, population, region, subregion, capital, tld, currencies, languages, maps : {googleMaps}} = cards[i];
+   document.querySelector(".country h2").innerText = common;
    document.querySelector(".details-ctr .flag").innerHTML = `<img src=${svg} alt=${common}>`;
    document.querySelector(".col-1").innerHTML = `<p>Native Name: <span>${nativeName[Object.keys(nativeName)[0]].official}</span></p><p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Sub Region: <span>${subregion}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
-   document.querySelector(".col-2").innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${Object.values(currencies).map(cc => cc.name).join(", ")}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p>`;  
+   document.querySelector(".col-2").innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${Object.values(currencies).map(cc => cc.name).join(", ")}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p><p><a href=${googleMaps} target="_blank">view on map<i class="fas fa-map-marked-alt"></i></a></p>`;  
    const border = document.querySelector(".borders");
 
    // LOGIC: it's not necessary to remove innerHTML if no border countries, as you won't need to call this function again for countries who don't have border countries in the first place 
