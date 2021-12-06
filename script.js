@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
    })
    .then((response) => {
-      console.log(response);
       data = response;
       codes = response.reduce((obj, cd, i) => ({...obj, [cd.cca3] : [cd.name.common, i]}), {});
       const mainContent = generateCards(response, codes);
@@ -101,7 +100,7 @@ function createCard(cd) {
    const Name = document.createElement('h2');
    Name.innerText = common;
    
-   flag.innerHTML = `<img src=${png} alt=${common}>`;
+   flag.innerHTML = `<img src=${png} alt="${common}">`;
    general.innerHTML = `<p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
 
    details.append(Name, general);
@@ -178,7 +177,7 @@ function addInnerHtml(cards, i, codes) {
 
    const {name : {common, nativeName}, borders, flags: {svg}, population, region, subregion, capital, tld, currencies, languages, maps : {googleMaps}} = cards[i];
    document.querySelector(".country h2").innerText = common;
-   document.querySelector(".details-ctr .flag").innerHTML = `<img src=${svg} alt=${common}>`;
+   document.querySelector(".details-ctr .flag").innerHTML = `<img src=${svg} alt="${common}">`;
    document.querySelector(".col-1").innerHTML = `<p>Native Name: <span>${nativeName[Object.keys(nativeName)[0]].official}</span></p><p>Population: <span>${population.toLocaleString()}</span></p><p>Region: <span>${region}</span></p><p>Sub Region: <span>${subregion}</span></p><p>Capital: <span>${capital ? capital : "unknown"}</span></p>`;
    document.querySelector(".col-2").innerHTML = `<p>Top Level Domain: <span>${tld.join(", ")}</span></p><p>Currencies: <span>${Object.values(currencies).map(cc => cc.name).join(", ")}</span></p><p>Languages: <span>${Object.values(languages).join(", ")}</span></p><p><a href=${googleMaps} target="_blank">view on map<i class="fas fa-map-marked-alt"></i></a></p>`;  
    const border = document.querySelector(".borders");
