@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
    };
    //search with keyword
    input.oninput = () => {
-      input.value ? searchWithKeyword(data, input.value) : neutralize(document.querySelectorAll('.card'));
+      input.value ? searchByKeyword(data, input.value.toLowerCase()) : neutralize(document.querySelectorAll('.card'));
    };
    //darkmode
    let darkMode = true;
@@ -119,7 +119,7 @@ function filterByRegion(cards, filterName) {
    })
 }
 
-function searchWithKeyword(cards, searchKeyword) {
+function searchByKeyword(cards, searchKeyword) {
    const childs = document.querySelectorAll('.card');
    neutralize(childs);
    cards.forEach( (card, i) => {
