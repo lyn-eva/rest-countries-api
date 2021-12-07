@@ -72,7 +72,6 @@ function generateCards(cards, codes) {
    mainContent.setAttribute('class', "main-content");
    cards.forEach((cd, i) => {
       const temp = createCard(cd);   
-      temp.setAttribute('data-id', i); //
       mainContent.appendChild(temp);
       
       temp.addEventListener('click', () => {

@@ -7,6 +7,9 @@
 a {
    text-decoration: none;
 }
+li {
+   list-style-type: none;
+}
 :root {
    --clr-elements: hsl(209, 23%, 22%);
    --clr-background: hsl(207, 26%, 17%);
@@ -116,6 +119,7 @@ header button:hover {
    padding: 8px 0;
 }
 .filter-region .option {
+   text-align: center;
    padding: 5px 12px;
 }
 .filter-region:hover, .filter-region button:hover, .card:hover, .more-details button:hover, header button:hover, a:hover {
