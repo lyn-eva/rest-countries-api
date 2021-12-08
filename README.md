@@ -1,4 +1,4 @@
-This is a web app about country details around the world. 
+This is a web app about country details around the world. [go to site](https://takamimusubinomikoto.github.io/rest-countries-api/)
 ## Functionalities
 - See all countries from the API on the homepage
 - Search for a country using an `input` field
