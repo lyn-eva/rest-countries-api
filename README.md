@@ -1,10 +1,11 @@
-This is a web app about country details around the world. [go to site](https://takamimusubinomikoto.github.io/rest-countries-api/)
+This is a web app about country details around the world. [go to site](https://lyn-eva.github.io/rest-countries-api/)
 ## Functionalities
 - See all countries from the API on the homepage
-- Search for a country using an `input` field
+- Search for a country
 - Filter countries by region
 - Click on a country to see more detailed information on a separate page
 - Click through to the border countries on the detail page
+- remember history of browsed detailed pages
 - Toggle the color scheme between light and dark mode
 - view the country on GOOGLE map
 
