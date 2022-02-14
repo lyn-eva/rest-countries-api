@@ -1,4 +1,4 @@
-This is a web app about country details around the world. [go to site](https://lyn-eva.github.io/rest-countries-api/)
+This is a web app about all the countries in the world.
 ## Functionalities
 - See all countries from the API on the homepage
 - Search for a country
